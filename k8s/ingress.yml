@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: react-ecs-ingress
+  namespace: react-ecs
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "react-ecs-static-ip"
+    kubernetes.io/ingress.allow-http: "true"
+    kubernetes.io/ingress.class: "aws"
+spec:
+  defaultBackend:
+    service:
+      name: react-ecs-service
+      port:
+        number: 80

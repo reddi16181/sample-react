@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-ecs-deployment
+  namespace: react-ecs
+spec:
+  selector:
+    matchLabels:
+      app: react-ecs
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: react-ecs
+    spec:
+      containers:
+        - name: react-ecs-backend-container
+          image: "reddi16181/react-ecs-app:v1"
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "1"
+            requests:
+              cpu: "0.2"
+          ports:
+            - containerPort: 80
+              protocol: TCP
